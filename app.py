@@ -18,4 +18,30 @@ soup = BeautifulSoup(source, 'lxml')
 
 article = soup.find('article')
 
-print(article.prettify())
+# print(article.prettify())
+
+# step 5 - find article header
+# headline = article.h2.a.text
+# print(headline)
+
+# step 6 - find summary text
+
+# summary = article.find('div', class_='entry-content').p.text
+
+# print(summary)
+
+# step 7 - find video id link embedded in i-frame
+
+vid_src = article.find('iframe', class_ ='youtube-player')['src']
+# print(vid_src)
+
+vid_id = vid_src.split('/')[4]
+vid_id = vid_id.split('?')[0]
+
+# print(vid_id)
+
+# step 8 create custom youtube link
+
+yt_link = f'https://www.youtube.com/watch?v={vid_id}'
+print(yt_link)
+        
