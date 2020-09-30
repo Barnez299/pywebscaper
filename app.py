@@ -1,10 +1,17 @@
 from bs4 import BeautifulSoup
 import requests
+import csv
 
 
 source = requests.get("https://coreyms.com/").text
 
 soup = BeautifulSoup(source, 'lxml')
+
+csv_file = open('corey_scrape.csv', 'w')
+
+csv_writer = csv.writer(csv_file)
+
+csv_writer.writerow(['headline','summary','video_link'])
 
 for article in soup.find_all('article'):
 
@@ -30,4 +37,8 @@ for article in soup.find_all('article'):
     print(yt_link)
 
     print()
+
+    csv_writer.writerow([headline, summary, yt_link])
+
+csv_file.close()
             
